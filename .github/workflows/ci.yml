@@ -16,10 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: npm ci #Install dependencies
       - run: npm test #Run test suite
   lint:
     needs: install #This job depends on the completion of the install job but runs in parallel with test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: npm ci #Install dependencies
       - run: npm run lint #Run linting checks
