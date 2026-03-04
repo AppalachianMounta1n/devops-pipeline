@@ -10,18 +10,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
       - run: npm ci #Clean install of dependencies
   test:
     needs: install #This job depends on the completion of the install job
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: npm ci #Install dependencies
+      - name: Restore node_modules
+        id: cache-test
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+      - if: steps.cache-test.outputs.cache-hit != 'true'
+        run: npm ci #Fallback install if cache missed
       - run: npm test #Run test suite
   lint:
     needs: install #This job depends on the completion of the install job but runs in parallel with test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: npm ci #Install dependencies
+      - name: Restore node_modules
+        id: cache-lint
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+      - if: steps.cache-lint.outputs.cache-hit != 'true'
+        run: npm ci #Fallback install if cache missed
       - run: npm run lint #Run linting checks
