@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "scripts": {
         "start": "node index.js",
-        "test": "echo 'Add tests here",
+        "test": "echo 'Add tests here'",
         "lint": "eslint ."
     },
     "dependencies": {
@@ -12,5 +12,9 @@
     },
     "devDependencies": {
         "eslint": "^8.0.0"
-    }
+    },
+    "description": "",
+    "main": "index.js",
+    "author": "",
+    "license": "ISC"
 }
