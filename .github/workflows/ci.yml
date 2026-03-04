@@ -6,19 +6,20 @@ on:
   pull_request:
     branches: [main] #Trigger on PRs to main branch
 jobs:
-  build:
-    runs-on: ubuntu-latest #Use GitHub's free Linux runner
+  install:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3 #Check out the repository code
-      - name: Set up Node.js #Install Node.js environment
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18' #Use Node.js 18 for consistency
-      - name: Cache dependencies #Cache node_modules to speed up builds
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm # Cache npm’s global cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }} #Key based on OS and package-lock.json
-      - run: npm ci #Install dependencies using package-lock.json
-      - run: npm test #Run tests defined in package.json
-      - run: npm run lint #Run ESLint to ensure code quality
+      - uses: actions/checkout@v3
+      - run: npm ci #Clean install of dependencies
+  test:
+    needs: install #This job depends on the completion of the install job
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm test #Run test suite
+  lint:
+    needs: install #This job depends on the completion of the install job but runs in parallel with test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm run lint #Run linting checks
