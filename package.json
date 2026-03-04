@@ -1,8 +1,23 @@
 {
-  "devDependencies": {
-    "husky": "^9.1.7"
-  },
-  "scripts": {
-    "prepare": "husky"
-  }
+    "name": "crud-backend",
+    "version": "0.0.1",
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "lint": "eslint .",
+        "prepare": "husky"
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "pg": "^8.7.3",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-scripts": "^4.0.3",
+        "axios": "^0.24.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.0.0",
+        "husky": "^9.1.7"
+    }
 }
