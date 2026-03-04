@@ -3,5 +3,4 @@
 **/.terraform.lock.hcl
 **/.terraform/*
 **/terraform.tfstate.backup
-**/package-lock.json
 **/node_modules/*
