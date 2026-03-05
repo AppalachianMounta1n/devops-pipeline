@@ -114,9 +114,6 @@ resource "google_cloudbuild_trigger" "ci_pipeline" {
   github {
     owner = "AppalachianMounta1n"
     name  = "devops-pipeline"
-    pull_request {
-      branch = "^main$"
-    }
     push {
       branch = "^main$"
     }
