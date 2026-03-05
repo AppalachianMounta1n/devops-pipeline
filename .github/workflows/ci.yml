@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [22.x, 24.x] #Test multiple Node versions
+        node-version: [22.x, 23.x, 24.x, 25.x] #Test multiple Node versions
         database: [postgres, mysql] #Test against different databases
     steps:
       - uses: actions/checkout@v3
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [22.x, 24.x] #Test multiple Node versions
+        node-version: [22.x, 23.x, 24.x, 25.x] #Test multiple Node versions
         database: [postgres, mysql] #Test against different databases
     steps:
       - uses: actions/checkout@v3
@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [22.x, 24.x] #Test multiple Node versions
+        node-version: [22.x, 23.x, 24.x, 25.x] #Test multiple Node versions
         database: [postgres, mysql] #Test against different databases
     steps:
       - uses: actions/checkout@v3
