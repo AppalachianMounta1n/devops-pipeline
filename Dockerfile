@@ -1,9 +1,9 @@
 #Stage 1: Build the application
 FROM node:18-alpine AS builder
 WORKDIR /app
-COPY package*.json
+COPY package*.json ./
 RUN npm ci
-COPY ..
+COPY . .
 RUN npm run build
 
 #Stage 2: Production image
