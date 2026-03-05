@@ -8,6 +8,10 @@ on:
 jobs:
   install:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x, 20.x, 22.x, 24.x] #Test multiple Node versions
+        database: [postgres, mysql] #Test against different databases
     steps:
       - uses: actions/checkout@v3
       - name: Cache node_modules
@@ -15,10 +19,17 @@ jobs:
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
       - run: npm ci #Clean install of dependencies
   test:
     needs: install #This job depends on the completion of the install job
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x, 20.x, 22.x, 24.x] #Test multiple Node versions
+        database: [postgres, mysql] #Test against different databases
     steps:
       - uses: actions/checkout@v3
       - name: Restore node_modules
@@ -27,11 +38,18 @@ jobs:
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
       - if: steps.cache-test.outputs.cache-hit != 'true'
         run: npm test #Run test suite
   lint:
     needs: install #This job depends on the completion of the install job but runs in parallel with test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x, 20.x, 22.x, 24.x] #Test multiple Node versions
+        database: [postgres, mysql] #Test against different databases
     steps:
       - uses: actions/checkout@v3
       - name: Restore node_modules
@@ -40,5 +58,8 @@ jobs:
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
       - if: steps.cache-lint.outputs.cache-hit != 'true'
         run: npm run lint #Run linting checks
