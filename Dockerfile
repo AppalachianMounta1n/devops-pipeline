@@ -9,7 +9,7 @@ RUN npm run build
 #Stage 2: Production image
 FROM node:18-alpine
 WORKDIR /app
-COPY --from=builder /app/build ./build
+COPY --from=builder /app/frontend ./build
 COPY --from=builder /app/backend ./backend
 COPY --from=builder /app/package*.json ./
 RUN npm ci --production
