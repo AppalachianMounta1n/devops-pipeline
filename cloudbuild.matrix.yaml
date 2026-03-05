@@ -1,0 +1,24 @@
+steps:
+  - id: install
+    name: node:$_NODE_VERSION
+    entrypoint: npm
+    args: [ci]
+    waitFor: ["-"]
+
+  - id: test
+    name: node:$_NODE_VERSION
+    entrypoint: npm
+    args: [test]
+    env:
+      - DATABASE=$_DATABASE
+    waitFor: [install]
+
+  - id: lint
+    name: node:$_NODE_VERSION
+    entrypoint: npm
+    args: [run, lint]
+    waitFor: [install]
+
+options:
+  machineType: E2_MEDIUM
+  logging: CLOUD_LOGGING_ONLY

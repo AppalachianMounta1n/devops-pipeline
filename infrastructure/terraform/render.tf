@@ -8,16 +8,16 @@ terraform {
 }
 
 provider "render" {
-  api_key = var.api_key
-  owner_id = var.owner_id
+  api_key                          = var.render_api_key
+  owner_id                         = var.owner_id
   skip_deploy_after_service_update = false
-  wait_for_deploy_completion = true
+  wait_for_deploy_completion       = true
 }
 
 resource "render_web_service" "web_app" {
   name          = "ci-demo-app"
   plan          = "starter"
-  region        = "oregon"
+  region        = var.region
   start_command = "npm start"
 
   runtime_source = {
