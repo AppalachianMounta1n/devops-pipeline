@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x, 19.x, 20.x, 21.x, 22.x, 23.x, 24.x, 25.x] #Test multiple Node versions
-        database: [postgres, mysql] #Test against different databases
+        database: [postgres, mysql, mongodb] #Test against different databases
     steps:
       - uses: actions/checkout@v3
       - name: Cache node_modules
@@ -33,7 +33,7 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x, 19.x, 20.x, 21.x, 22.x, 23.x, 24.x, 25.x] #Test multiple Node versions
-        database: [postgres, mysql] #Test against different databases
+        database: [postgres, mysql, mongodb] #Test against different databases
     steps:
       - uses: actions/checkout@v3
       - name: Restore node_modules
@@ -57,7 +57,7 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x, 19.x, 20.x, 21.x, 22.x, 23.x, 24.x, 25.x] #Test multiple Node versions
-        database: [postgres, mysql] #Test against different databases
+        database: [postgres, mysql, mongodb] #Test against different databases
     steps:
       - uses: actions/checkout@v3
       - name: Restore node_modules

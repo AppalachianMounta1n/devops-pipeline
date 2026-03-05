@@ -4,3 +4,4 @@
 **/.terraform/*
 **/terraform.tfstate.backup
 **/node_modules/*
+**/variables.tf
