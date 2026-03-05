@@ -26,9 +26,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Build Docker image
-        run: |
-          DOCKER_BUILDKIT=1 docker build -t app:latest .
       - run: npm ci #Clean install of dependencies
   test:
     needs: install #This job depends on the completion of the install job
